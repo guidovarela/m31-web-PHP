@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $titulo ?> - M31 Electrónica, equipamiento para emisoras FM y AM</title>
     <meta name="description" content= "Empresa argentina con más de 15 años en el mercado de la Radiodifusión, desarrollando equipamiento y radiotransmisores para emisoras de radio AM y FM" />
     <meta name="keywords" content="equipamiento de radiodifusion, Am y FM , transporte de señal, desarrollo argentino"/>
-    <link rel="canonical" href="http://www.m31electronica.com/" />
     <meta name="author" content="http://www.aldeadg.com.ar" />
     <meta name="copyright" content="M31 Electronica SRL" />
     <meta name="robots" content="index, follow"/>
     <meta http-equiv="cache-control" content="no-cache"/>
-
-
-
-
+    
+    <title><?php echo $titulo ?> - M31 Electrónica, equipamiento para emisoras FM y AM</title>
+    
+    <link rel="canonical" href="http://www.m31electronica.com/" />
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" alt="icon M31">
 
         <!-- Bootstrap CSS -->

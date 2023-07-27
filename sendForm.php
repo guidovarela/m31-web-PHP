@@ -60,6 +60,7 @@ include("head.php")
 
                     <?php
 
+
                     // set the default timezone to use.
                     date_default_timezone_set('UTC');
 
@@ -88,7 +89,52 @@ include("head.php")
                     } else{
                         echo "<span class='alert alert-danger'>Error en el envío.  Escribanos a ".$destinatario."</span>";
                     }  
-                                
+                    
+                    // PHPMailer
+                    use PHPMailer\PHPMailer\PHPMailer;
+                    use PHPMailer\PHPMailer\Exception;
+                    
+                    require 'phpmailer/src/Exception.php';
+                    require 'phpmailer/src/PHPMailer.php';
+                    require 'phpmailer/src/SMTP.php';
+                    
+                    //Create an instance; passing `true` enables exceptions
+                    $mail = new PHPMailer(true);
+                    
+                    try {
+                        //Server settings
+                        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                        $mail->isSMTP();                                            //Send using SMTP
+                        $mail->Host       = 'smtp.example.com';                     //Set the SMTP server to send through
+                        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                        $mail->Username   = 'user@example.com';                     //SMTP username
+                        $mail->Password   = 'secret';                               //SMTP password
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                    
+                        //Recipients
+                        $mail->setFrom($destinatario, 'M31 Electronica');
+                        $mail->addAddress($email, $nombre);     //Add a recipient
+                        // $mail->addAddress('ellen@example.com');               //Name is optional
+                        $mail->addReplyTo('guido.varela@gmail.com', 'Guido Varela (Dev)');
+                        // $mail->addCC('cc@example.com');
+                        // $mail->addBCC('bcc@example.com');
+                    
+                        //Attachments
+                        $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+                        $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+                    
+                        //Content
+                        $mail->isHTML(true);                                  //Set email format to HTML
+                        $mail->Subject = $asunto;
+                        $mail->Body    = $mensaje;
+                        $mail->AltBody = $cuerpoMensaje;
+                    
+                        $mail->send();
+                        echo 'El mensaje fue enviado';
+                    } catch (Exception $e) {
+                        echo "El mensaje no pudo ser enviado. Contactese por email a <a href='mailto:m31@m31electronica.com'>m31@m31electronica.com</a>. Codigo de error:{$mail->ErrorInfo}";
+                    }
                     ?>
                 
             </div>
