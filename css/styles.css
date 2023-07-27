@@ -1,0 +1,69 @@
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&family=Patua+One&display=swap');
+/* 'Patua One' */
+/* 'Lato' */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
+
+html{
+    font-size: 16px;
+}
+body{
+    font-family: 'Lato';
+}
+
+.titles{
+    font-family: 'Patua One';
+    color: rgb(43, 43, 43);
+}
+
+.headerServicios{
+    background: url("../img/header_servicios1.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    height: 30vh;
+    background-position: center;
+}
+.headerProductos{
+    background: url("../img/header_productos2.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    height: 30vh;
+    background-position: center;
+}
+.headerContacto{
+    background: url("../img/header_contacto2.jpg"), #2a91d6;
+    /* max-width: 1400px; */
+    background-size:cover;
+    background-repeat: no-repeat;
+    height: 30vh;
+    background-position: center;
+}
+
+.mainTitle{
+    position: absolute;
+    bottom: -21vh;
+    left: 42%;
+    color: white;
+    font-weight: bolder;
+}
+
+
+
+.color-basic{
+    color: #2a91d6;
+}
+.bg-basic{
+    background: #2a91d6;
+}
+
+/* Contacto */
+#formContacto textarea{
+    resize: none;
+}
+
+.footer{
+    background: #2a91d6;
+    color: white;
+}
