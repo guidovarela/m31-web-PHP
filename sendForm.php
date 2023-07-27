@@ -56,43 +56,34 @@ include("head.php")
             </div>
             <div class="col-lg-1"></div>
             <div class="col-lg-5">
-                <div class="respuestaForm border border-info rounded">
+                <div class="respuestaForm border border-info rounded p-3">
 
                     <?php
 
 
                     // set the default timezone to use.
-                    date_default_timezone_set('UTC');
+                    date_default_timezone_set('America/Argentina/Buenos_Aires');
 
                     $nombre = $_POST['nombre'];
                     $email =  $_POST['email'];
                     $asunto =  $_POST['asunto'];
                     $mensaje = $_POST['mensaje'];
 
-                    $destinatario = "guido.varela@gmail.com";
+                    $destinatario = "info@m31electronica.com";
                     $fechaEnvio = date("d-m-Y H:i");
                     // asunto
-                    $cuerpoMensaje = "<p>Nombre: ".$nombre."<br> Email: ".$email."<br> Mensaje: ".$mensaje."</p>Enviado el ".$fechaEnvio;
-
-                    $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
-                    $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                    // Cabeceras adicionales
-                    $cabeceras .= 'To:'.$destinatario;
-                    $cabeceras .= 'From: '. $nombre.'<'.$email.'>' . "\r\n";
-
-                    // 3) envio de datos
-                    @$envio1 = mail($destinatario,$asunto,$cuerpoMensaje, $cabeceras);
-
-                    // 4) Evaluacion del envio
-                    if($envio1 === false){
-                        echo "<span class='alert alert-success'>Gracias ".$nombre." por su mensaje. Nos podremos en contacto a la brevedad</span>";
-                    } else{
-                        echo "<span class='alert alert-danger'>Error en el envío.  Escribanos a ".$destinatario."</span>";
-                    }  
+                    $cuerpoMensaje = "<p><strong>Nuevo Mensaje desde el sitio<strong></p><p>Nombre: ".$nombre."<br> Email: ".$email."<br> Mensaje: ".$mensaje."</p>Enviado el ".$fechaEnvio;                          
                     
+                    //Datos Envio SMTP M31
+                    $smtp_host="m31electronica.com";
+                    $smtp_user=$destinatario;
+                    $smtp_pass="m31info13";
+                    $smtp_port=465;
+
                     // PHPMailer
                     use PHPMailer\PHPMailer\PHPMailer;
                     use PHPMailer\PHPMailer\Exception;
+                    use PHPMailer\PHPMailer\SMTP;
                     
                     require 'phpmailer/src/Exception.php';
                     require 'phpmailer/src/PHPMailer.php';
@@ -103,39 +94,42 @@ include("head.php")
                     
                     try {
                         //Server settings
-                        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
                         $mail->isSMTP();                                            //Send using SMTP
-                        $mail->Host       = 'smtp.example.com';                     //Set the SMTP server to send through
+                        $mail->Host       = $smtp_host;                     //Set the SMTP server to send through
                         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                        $mail->Username   = 'user@example.com';                     //SMTP username
-                        $mail->Password   = 'secret';                               //SMTP password
+                        $mail->Username   = $smtp_user;                     //SMTP username
+                        $mail->Password   = $smtp_pass;                               //SMTP password
                         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                        $mail->Port       = $smtp_port;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
                     
                         //Recipients
-                        $mail->setFrom($destinatario, 'M31 Electronica');
-                        $mail->addAddress($email, $nombre);     //Add a recipient
+                        $mail->setFrom($email, $nombre);
+                        $mail->addAddress($destinatario, 'M31 Electronica');     //Add a recipient
                         // $mail->addAddress('ellen@example.com');               //Name is optional
-                        $mail->addReplyTo('guido.varela@gmail.com', 'Guido Varela (Dev)');
-                        // $mail->addCC('cc@example.com');
+                        // $mail->addReplyTo();
+                        $mail->addCC('guido.varela@gmail.com', 'Guido Varela (Dev)');
                         // $mail->addBCC('bcc@example.com');
                     
                         //Attachments
-                        $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-                        $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+                        // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+                        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
                     
                         //Content
                         $mail->isHTML(true);                                  //Set email format to HTML
-                        $mail->Subject = $asunto;
-                        $mail->Body    = $mensaje;
-                        $mail->AltBody = $cuerpoMensaje;
+                        $mail->Subject = 'Desde m31electronica.com - '.$asunto;
+                        $mail->Body    = $cuerpoMensaje;
                     
                         $mail->send();
-                        echo 'El mensaje fue enviado';
+                        echo '<div class="envioForm"><div class="icon text-success fs-2"><i class="fa-solid fa-circle-check"></i></div><p>Gracias '.$nombre.' por su mensaje.<br>Nos podremos en contacto a la brevedad</p>
+                        </div>';
                     } catch (Exception $e) {
-                        echo "El mensaje no pudo ser enviado. Contactese por email a <a href='mailto:m31@m31electronica.com'>m31@m31electronica.com</a>. Codigo de error:{$mail->ErrorInfo}";
+                        echo '<div class="envioForm"><div class="icon text-danger fs-2"><i class="fa-solid fa-circle-exclamation"></i></div><p>El mensaje no pudo ser enviado. Contactese por email a <a href="mailto:info@m31electronica.com">info@m31electronica.com</a>.</p>';
+                        //Codigo de error:{$mail->ErrorInfo}
                     }
+                    
                     ?>
+                
                 
             </div>
                 
