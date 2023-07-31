@@ -7,5 +7,15 @@
         AOS.init();
     </script>
 
+    <!-- recaptcha v3 -->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
+    <script>
+   function onSubmit(token) {
+     document.getElementById("formContacto").submit();
+   }
+ </script>
+
+
 </body>
 </html>

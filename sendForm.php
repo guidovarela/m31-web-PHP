@@ -108,8 +108,8 @@ include("head.php")
                         $mail->addAddress($destinatario, 'M31 Electronica');     //Add a recipient
                         // $mail->addAddress('ellen@example.com');               //Name is optional
                         // $mail->addReplyTo();
-                        $mail->addCC('guido.varela@gmail.com', 'Guido Varela (Dev)');
-                        // $mail->addBCC('bcc@example.com');
+                        $mail->addCC('m31@electronica.com');
+                        $mail->addBCC('guido.varela@gmail.com');
                     
                         //Attachments
                         // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments

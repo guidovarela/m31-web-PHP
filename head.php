@@ -23,3 +23,4 @@
 
     <link rel="stylesheet" href="css/styles.css">
 </head>
+<?php include_once("googleAnalytics.php") ?>

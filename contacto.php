@@ -97,7 +97,7 @@ include("head.php")
                             Debes completar un mensaje
                         </span>
                     </div>
-                    <input type="submit" value="Enviar" class="btn btn-info">
+                    <input  type="submit" class="g-recaptcha" data-sitekey="6LdiSW4nAAAAAAUQ1_8o_edNRnIvmhWHkkARICw-" data-callback='onSubmit'  data-action='submit' value="Enviar" class="btn btn-info">
 
                 </form>
             </div>
